@@ -16,7 +16,7 @@ public class AppUser extends AbstractEntity {
     protected String passwordHash;
 
     @ManyToMany
-    protected List<Role> roles;
+    protected List<Article> likedArticles;
 
     public String getUserName() {
         return userName;
@@ -50,11 +50,11 @@ public class AppUser extends AbstractEntity {
         this.passwordHash = passwordHash;
     }
 
-    public List<Role> getRoles() {
-        return roles;
+    public List<Article> getLikedArticles() {
+        return likedArticles;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public void setLikedArticles(List<Article> likedArticles) {
+        this.likedArticles = likedArticles;
     }
 }

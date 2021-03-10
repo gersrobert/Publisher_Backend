@@ -10,7 +10,6 @@ public class ArticleDetailedDTO extends AbstractDTO {
 	protected LocalDateTime createdAt;
 	protected Set<AppUserDTO> authors;
 	protected Set<CategoryDTO> categories;
-	protected PublisherDTO publisher;
 	protected boolean liked;
 	protected int likeCount;
 	protected Set<CommentDTO> comments;
@@ -55,12 +54,12 @@ public class ArticleDetailedDTO extends AbstractDTO {
 		this.categories = categories;
 	}
 
-	public PublisherDTO getPublisher() {
-		return publisher;
+	public boolean isLiked() {
+		return liked;
 	}
 
-	public void setPublisher(PublisherDTO publisher) {
-		this.publisher = publisher;
+	public void setLiked(boolean liked) {
+		this.liked = liked;
 	}
 
 	public int getLikeCount() {
@@ -77,13 +76,5 @@ public class ArticleDetailedDTO extends AbstractDTO {
 
 	public void setComments(Set<CommentDTO> comments) {
 		this.comments = comments;
-	}
-
-	public boolean isLiked() {
-		return liked;
-	}
-
-	public void setLiked(boolean liked) {
-		this.liked = liked;
 	}
 }

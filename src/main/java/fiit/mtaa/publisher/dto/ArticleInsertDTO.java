@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public class ArticleInsertDTO {
 	private UUID id;
-	private List<UUID> authors;
+	private UUID authors;
 	private String title;
 	private List<String> categories;
 	private String content;
@@ -19,15 +19,6 @@ public class ArticleInsertDTO {
 	@JsonSetter
 	public void setId(UUID id) {
 		this.id = id;
-	}
-
-	public List<UUID> getAuthors() {
-		return authors;
-	}
-
-	@JsonSetter
-	public void setAuthors(List<UUID> authors) {
-		this.authors = authors;
 	}
 
 	public String getTitle() {
@@ -55,5 +46,13 @@ public class ArticleInsertDTO {
 	@JsonSetter
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public UUID getAuthors() {
+		return authors;
+	}
+
+	public void setAuthors(UUID authors) {
+		this.authors = authors;
 	}
 }

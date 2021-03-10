@@ -24,7 +24,7 @@ public class Article extends AbstractEntity {
     @Transient
     protected boolean liked;
 
-    @Transient
+    @ManyToMany
     protected List<AppUser> authors;
 
     public String getTitle() {
