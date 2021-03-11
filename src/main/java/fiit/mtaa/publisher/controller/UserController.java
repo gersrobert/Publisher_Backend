@@ -28,33 +28,6 @@ public class UserController extends AbstractController {
 	@GetMapping(value = "/{uuid}")
 	public ResponseEntity<AppUserDTO> getUser(@PathVariable String uuid) {
 		throw new RuntimeException("Not yet implemented");
-<<<<<<< HEAD
-	}
-
-	@GetMapping(value = "/{uuid}/detailed")
-	public ResponseEntity<AppUserDetailedDTO> getUserDetailed(@PathVariable String uuid) {
-		throw new RuntimeException("Not yet implemented");
-	}
-
-	@PostMapping(value = "/register")
-	public ResponseEntity registerUser(@RequestBody AppUserWithPasswordDTO user) {
-		// boolean response = true;
-
-		// System.out.println(user.getPasswordHash());
-		
-		// // try {
-		// // 	response = userService.registerAppUser(user);
-		// // } catch (Exception e) {
-		// // 	logger.error("Error registering user", e);
-		// // 	throw new InternalServerException(e);
-		// // }
-
-		// if (response) {
-		// 	return new ResponseEntity(HttpStatus.CREATED);
-		// } else {
-		// 	return new ResponseEntity(HttpStatus.FORBIDDEN);
-		// }
-		throw new RuntimeException("Not yet implemented");
 	}
 
 	@PostMapping(value = "/set_photo")
@@ -62,27 +35,8 @@ public class UserController extends AbstractController {
 		throw new RuntimeException("Not yet implemented");
 	}
 
-	@GetMapping(value = "/{userId}/actions/{articleId}")
-	public ResponseEntity<Collection<String>> getActions(@PathVariable String userId, @PathVariable String articleId) {
-		throw new RuntimeException("Not yet implemented");
-
-=======
-	}
-
 	@PostMapping(value = "/register")
 	public ResponseEntity<IdDTO> registerUser(@RequestBody AppUserWithPasswordDTO user) {
 		throw new RuntimeException("Not yet implemented");
->>>>>>> 9ff9387c9a0f6a6b263be87e3e4419e061a8d42e
 	}
-
-	// @GetMapping(value = "/test")
-	// public ResponseEntity<AppUserDTO> getTest() {
-	// 	AppUserDTO response = new AppUserDTO();
-	// 	response.setFirstName("firstName");
-	// 	response.setLastName("lastName");
-	// 	response.setUserName("userName");
-	// 	response.setId("id");
-
-	// 	return ResponseEntity.of(Optional.of(response));
-	// }
 }
