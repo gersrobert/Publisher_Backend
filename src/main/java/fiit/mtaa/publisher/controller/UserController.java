@@ -1,8 +1,8 @@
 package fiit.mtaa.publisher.controller;
 
 import fiit.mtaa.publisher.dto.AppUserDTO;
-import fiit.mtaa.publisher.dto.AppUserDetailedDTO;
 import fiit.mtaa.publisher.dto.AppUserWithPasswordDTO;
+import fiit.mtaa.publisher.dto.IdDTO;
 import fiit.mtaa.publisher.dto.LoginRequestDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,24 +27,10 @@ public class UserController extends AbstractController {
 	@GetMapping(value = "/{uuid}")
 	public ResponseEntity<AppUserDTO> getUser(@PathVariable String uuid) {
 		throw new RuntimeException("Not yet implemented");
-
-	}
-
-	@GetMapping(value = "/{uuid}/detailed")
-	public ResponseEntity<AppUserDetailedDTO> getUserDetailed(@PathVariable String uuid) {
-		throw new RuntimeException("Not yet implemented");
-
 	}
 
 	@PostMapping(value = "/register")
-	public ResponseEntity registerUser(@RequestBody AppUserWithPasswordDTO user) {
+	public ResponseEntity<IdDTO> registerUser(@RequestBody AppUserWithPasswordDTO user) {
 		throw new RuntimeException("Not yet implemented");
-
-	}
-
-	@GetMapping(value = "/{userId}/actions/{articleId}")
-	public ResponseEntity<Collection<String>> getActions(@PathVariable String userId, @PathVariable String articleId) {
-		throw new RuntimeException("Not yet implemented");
-
 	}
 }

@@ -7,9 +7,8 @@ public class ArticleSimpleDTO extends AbstractDTO {
 
 	protected String title;
 	protected LocalDateTime createdAt;
-	protected Set<AppUserDTO> authors;
+	protected AppUserDTO author;
 	protected Set<CategoryDTO> categories;
-	protected PublisherDTO publisher;
 	protected int likeCount;
 	protected boolean liked;
 
@@ -29,12 +28,12 @@ public class ArticleSimpleDTO extends AbstractDTO {
 		this.createdAt = createdAt;
 	}
 
-	public Set<AppUserDTO> getAuthors() {
-		return authors;
+	public AppUserDTO getAuthor() {
+		return author;
 	}
 
-	public void setAuthors(Set<AppUserDTO> authors) {
-		this.authors = authors;
+	public void setAuthor(AppUserDTO author) {
+		this.author = author;
 	}
 
 	public Set<CategoryDTO> getCategories() {
@@ -43,14 +42,6 @@ public class ArticleSimpleDTO extends AbstractDTO {
 
 	public void setCategories(Set<CategoryDTO> categories) {
 		this.categories = categories;
-	}
-
-	public PublisherDTO getPublisher() {
-		return publisher;
-	}
-
-	public void setPublisher(PublisherDTO publisher) {
-		this.publisher = publisher;
 	}
 
 	public int getLikeCount() {
