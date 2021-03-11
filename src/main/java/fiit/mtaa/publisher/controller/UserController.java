@@ -39,4 +39,15 @@ public class UserController extends AbstractController {
 	public ResponseEntity<IdDTO> registerUser(@RequestBody AppUserWithPasswordDTO user) {
 		throw new RuntimeException("Not yet implemented");
 	}
+
+	// @GetMapping(value = "/test")
+	// public ResponseEntity<AppUserDTO> getTest() {
+	// 	AppUserDTO response = new AppUserDTO();
+	// 	response.setFirstName("firstName");
+	// 	response.setLastName("lastName");
+	// 	response.setUserName("userName");
+	// 	response.setId("id");
+
+	// 	return ResponseEntity.of(Optional.of(response));
+	// }
 }
