@@ -20,11 +20,6 @@ public class UserController extends AbstractController {
 
 	Logger logger = LoggerFactory.getLogger(UserController.class);
 
-	@PostMapping(value = "/login", headers = "Accept=application/json", produces = "application/json")
-	public ResponseEntity<UUID> login(@RequestBody LoginRequestDTO loginRequestDTO) {
-		throw new RuntimeException("Not yet implemented");
-	}
-
 	@GetMapping(value = "/{uuid}")
 	public ResponseEntity<AppUserDTO> getUser(@PathVariable String uuid) {
 		throw new RuntimeException("Not yet implemented");

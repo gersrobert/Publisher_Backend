@@ -21,6 +21,8 @@ public class AppUser extends AbstractEntity {
             inverseJoinColumns = { @JoinColumn(name = "article_id") })
     protected List<Article> likedArticles;
 
+    protected byte[] photo;
+
     public String getUserName() {
         return userName;
     }
@@ -59,5 +61,13 @@ public class AppUser extends AbstractEntity {
 
     public void setLikedArticles(List<Article> likedArticles) {
         this.likedArticles = likedArticles;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
     }
 }
