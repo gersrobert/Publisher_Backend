@@ -21,11 +21,14 @@ public class Article extends AbstractEntity {
 
     protected int likeCount;
 
+    @ManyToOne
+    protected AppUser author;
+
+    @ManyToMany(mappedBy = "likedArticles")
+    protected List<AppUser> likedUsers;
+
     @Transient
     protected boolean liked;
-
-    @ManyToMany
-    protected List<AppUser> authors;
 
     public String getTitle() {
         return title;
@@ -75,11 +78,11 @@ public class Article extends AbstractEntity {
         this.liked = liked;
     }
 
-    public List<AppUser> getAuthors() {
-        return authors;
+    public AppUser getAuthor() {
+        return author;
     }
 
-    public void setAuthors(List<AppUser> authors) {
-        this.authors = authors;
+    public void setAuthor(AppUser authors) {
+        this.author = authors;
     }
 }

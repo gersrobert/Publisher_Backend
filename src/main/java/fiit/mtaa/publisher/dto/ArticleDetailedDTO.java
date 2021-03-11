@@ -8,7 +8,7 @@ public class ArticleDetailedDTO extends AbstractDTO {
 	protected String title;
 	protected String content;
 	protected LocalDateTime createdAt;
-	protected Set<AppUserDTO> authors;
+	protected AppUserDTO author;
 	protected Set<CategoryDTO> categories;
 	protected boolean liked;
 	protected int likeCount;
@@ -38,12 +38,12 @@ public class ArticleDetailedDTO extends AbstractDTO {
 		this.createdAt = createdAt;
 	}
 
-	public Set<AppUserDTO> getAuthors() {
-		return authors;
+	public AppUserDTO getAuthor() {
+		return author;
 	}
 
-	public void setAuthors(Set<AppUserDTO> authors) {
-		this.authors = authors;
+	public void setAuthor(AppUserDTO author) {
+		this.author = author;
 	}
 
 	public Set<CategoryDTO> getCategories() {

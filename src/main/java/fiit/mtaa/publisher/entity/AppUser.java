@@ -16,6 +16,9 @@ public class AppUser extends AbstractEntity {
     protected String passwordHash;
 
     @ManyToMany
+    @JoinTable(name = "app_user_liked_articles",
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "article_id") })
     protected List<Article> likedArticles;
 
     public String getUserName() {

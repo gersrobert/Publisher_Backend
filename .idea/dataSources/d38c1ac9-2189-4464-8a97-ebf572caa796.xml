@@ -806,7 +806,7 @@ false posixrules
     <database id="6" parent="1" name="publisher">
       <ObjectId>1696650</ObjectId>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>72214</IntrospectionStateNumber>
+      <IntrospectionStateNumber>72337</IntrospectionStateNumber>
       <Current>1</Current>
     </database>
     <role id="7" parent="1" name="pg_execute_server_program">
@@ -877,7 +877,7 @@ UC/10
 </Acl>
       <StateNumber>276</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>72215</IntrospectionStateNumber>
+      <IntrospectionStateNumber>72338</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="21" parent="6" name="plpgsql">
@@ -978,51 +978,36 @@ UC/10
       <Type>index</Type>
     </access-method>
     <table id="33" parent="20" name="app_user">
-      <ObjectId>1841054</ObjectId>
+      <ObjectId>1841431</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>72205</StateNumber>
+      <StateNumber>72331</StateNumber>
     </table>
     <table id="34" parent="20" name="app_user_liked_articles">
-      <ObjectId>1841062</ObjectId>
+      <ObjectId>1841425</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>72204</StateNumber>
+      <StateNumber>72330</StateNumber>
     </table>
-    <table id="35" parent="20" name="app_user_roles">
-      <ObjectId>1841068</ObjectId>
+    <table id="35" parent="20" name="article">
+      <ObjectId>1841439</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>72206</StateNumber>
+      <StateNumber>72330</StateNumber>
     </table>
-    <table id="36" parent="20" name="article">
-      <ObjectId>1841074</ObjectId>
+    <table id="36" parent="20" name="article_categories">
+      <ObjectId>1841447</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>72204</StateNumber>
+      <StateNumber>72333</StateNumber>
     </table>
-    <table id="37" parent="20" name="article_authors">
-      <ObjectId>1841082</ObjectId>
+    <table id="37" parent="20" name="category">
+      <ObjectId>1841453</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>72208</StateNumber>
+      <StateNumber>72333</StateNumber>
     </table>
-    <table id="38" parent="20" name="article_categories">
-      <ObjectId>1841088</ObjectId>
+    <table id="38" parent="20" name="comment">
+      <ObjectId>1841461</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>72210</StateNumber>
+      <StateNumber>72335</StateNumber>
     </table>
-    <table id="39" parent="20" name="category">
-      <ObjectId>1841094</ObjectId>
-      <Owner>postgres</Owner>
-      <StateNumber>72210</StateNumber>
-    </table>
-    <table id="40" parent="20" name="comment">
-      <ObjectId>1841102</ObjectId>
-      <Owner>postgres</Owner>
-      <StateNumber>72212</StateNumber>
-    </table>
-    <table id="41" parent="20" name="role">
-      <ObjectId>1841110</ObjectId>
-      <Owner>postgres</Owner>
-      <StateNumber>72206</StateNumber>
-    </table>
-    <routine id="42" parent="20" name="like_rev">
+    <routine id="39" parent="20" name="like_rev">
       <ObjectId>1723927</ObjectId>
       <Owner>postgres</Owner>
       <SourceTextLength>19</SourceTextLength>
@@ -1033,7 +1018,7 @@ UC/10
       <RoutineKind>function</RoutineKind>
       <Rows>0.0</Rows>
     </routine>
-    <operator id="43" parent="20" name="~~~~">
+    <operator id="40" parent="20" name="~~~~">
       <ObjectId>1723928</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>28304</StateNumber>
@@ -1043,58 +1028,58 @@ UC/10
       <RightType>text|0s</RightType>
       <ResultType>boolean|0s</ResultType>
     </operator>
-    <column id="44" parent="33" name="id">
+    <column id="41" parent="33" name="id">
       <Position>1</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>72193</StateNumber>
+      <StateNumber>72323</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="45" parent="33" name="created_at">
+    <column id="42" parent="33" name="created_at">
       <Position>2</Position>
       <DataType>timestamp|0s</DataType>
-      <StateNumber>72193</StateNumber>
+      <StateNumber>72323</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="46" parent="33" name="state">
+    <column id="43" parent="33" name="state">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
-      <StateNumber>72193</StateNumber>
+      <StateNumber>72323</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="47" parent="33" name="updated_at">
+    <column id="44" parent="33" name="updated_at">
       <Position>4</Position>
       <DataType>timestamp|0s</DataType>
-      <StateNumber>72193</StateNumber>
+      <StateNumber>72323</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="48" parent="33" name="first_name">
+    <column id="45" parent="33" name="first_name">
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
-      <StateNumber>72193</StateNumber>
+      <StateNumber>72323</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="49" parent="33" name="last_name">
+    <column id="46" parent="33" name="last_name">
       <Position>6</Position>
       <DataType>varchar(255)|0s</DataType>
-      <StateNumber>72193</StateNumber>
+      <StateNumber>72323</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="50" parent="33" name="password_hash">
+    <column id="47" parent="33" name="password_hash">
       <Position>7</Position>
       <DataType>varchar(255)|0s</DataType>
-      <StateNumber>72193</StateNumber>
+      <StateNumber>72323</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="51" parent="33" name="user_name">
+    <column id="48" parent="33" name="user_name">
       <Position>8</Position>
       <DataType>varchar(255)|0s</DataType>
-      <StateNumber>72193</StateNumber>
+      <StateNumber>72323</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="52" parent="33" name="app_user_pkey">
-      <ObjectId>1841060</ObjectId>
-      <StateNumber>72193</StateNumber>
+    <index id="49" parent="33" name="app_user_pkey">
+      <ObjectId>1841437</ObjectId>
+      <StateNumber>72323</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
@@ -1103,9 +1088,9 @@ UC/10
       <CollationNames>default</CollationNames>
       <ClassIds>3126</ClassIds>
     </index>
-    <index id="53" parent="33" name="uk_cpt2jpnop7mcpds1sv2i5629w">
-      <ObjectId>1841118</ObjectId>
-      <StateNumber>72203</StateNumber>
+    <index id="50" parent="33" name="uk_cpt2jpnop7mcpds1sv2i5629w">
+      <ObjectId>1841469</ObjectId>
+      <StateNumber>72329</StateNumber>
       <ColNames>user_name</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
@@ -1113,134 +1098,106 @@ UC/10
       <CollationNames>default</CollationNames>
       <ClassIds>3126</ClassIds>
     </index>
-    <key id="54" parent="33" name="app_user_pkey">
-      <ObjectId>1841061</ObjectId>
-      <StateNumber>72193</StateNumber>
+    <key id="51" parent="33" name="app_user_pkey">
+      <ObjectId>1841438</ObjectId>
+      <StateNumber>72323</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>app_user_pkey</UnderlyingIndexName>
     </key>
-    <key id="55" parent="33" name="uk_cpt2jpnop7mcpds1sv2i5629w">
-      <ObjectId>1841119</ObjectId>
-      <StateNumber>72203</StateNumber>
+    <key id="52" parent="33" name="uk_cpt2jpnop7mcpds1sv2i5629w">
+      <ObjectId>1841470</ObjectId>
+      <StateNumber>72329</StateNumber>
       <ColNames>user_name</ColNames>
       <UnderlyingIndexName>uk_cpt2jpnop7mcpds1sv2i5629w</UnderlyingIndexName>
     </key>
-    <column id="56" parent="34" name="app_user_id">
+    <column id="53" parent="34" name="user_id">
       <Position>1</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>72194</StateNumber>
+      <StateNumber>72322</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="57" parent="34" name="liked_articles_id">
+    <column id="54" parent="34" name="article_id">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>72194</StateNumber>
+      <StateNumber>72322</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <foreign-key id="58" parent="34" name="fkqp3a0twoq86usn1pocmpfrdvi">
-      <ObjectId>1841125</ObjectId>
-      <StateNumber>72205</StateNumber>
-      <ColNames>app_user_id</ColNames>
-      <RefTableId>1841054</RefTableId>
+    <foreign-key id="55" parent="34" name="fktgasm1c1obxwsnlh5a7t8xis4">
+      <ObjectId>1841476</ObjectId>
+      <StateNumber>72331</StateNumber>
+      <ColNames>user_id</ColNames>
+      <RefTableId>1841431</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>app_user</RefTableName>
       <RefKeyName>app_user_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="59" parent="34" name="fklxa9kgihu7w3xylw337875i82">
-      <ObjectId>1841120</ObjectId>
-      <StateNumber>72204</StateNumber>
-      <ColNames>liked_articles_id</ColNames>
-      <RefTableId>1841074</RefTableId>
+    <foreign-key id="56" parent="34" name="fkhig868q6nkrx6kmf9wk7jmqc9">
+      <ObjectId>1841471</ObjectId>
+      <StateNumber>72330</StateNumber>
+      <ColNames>article_id</ColNames>
+      <RefTableId>1841439</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>article</RefTableName>
       <RefKeyName>article_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="60" parent="35" name="app_user_id">
+    <column id="57" parent="35" name="id">
       <Position>1</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>72195</StateNumber>
+      <StateNumber>72324</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="61" parent="35" name="roles_id">
-      <Position>2</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>72195</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <foreign-key id="62" parent="35" name="fkkwxexnudtp5gmt82j0qtytnoe">
-      <ObjectId>1841135</ObjectId>
-      <StateNumber>72207</StateNumber>
-      <ColNames>app_user_id</ColNames>
-      <RefTableId>1841054</RefTableId>
-      <RefColPositions>1</RefColPositions>
-      <RefTableName>app_user</RefTableName>
-      <RefKeyName>app_user_pkey</RefKeyName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
-    <foreign-key id="63" parent="35" name="fk23e7b5jyl3ql41rk3566gywdd">
-      <ObjectId>1841130</ObjectId>
-      <StateNumber>72206</StateNumber>
-      <ColNames>roles_id</ColNames>
-      <RefTableId>1841110</RefTableId>
-      <RefColPositions>1</RefColPositions>
-      <RefTableName>role</RefTableName>
-      <RefKeyName>role_pkey</RefKeyName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
-    <column id="64" parent="36" name="id">
-      <Position>1</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>72196</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="65" parent="36" name="created_at">
+    <column id="58" parent="35" name="created_at">
       <Position>2</Position>
       <DataType>timestamp|0s</DataType>
-      <StateNumber>72196</StateNumber>
+      <StateNumber>72324</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="66" parent="36" name="state">
+    <column id="59" parent="35" name="state">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
-      <StateNumber>72196</StateNumber>
+      <StateNumber>72324</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="67" parent="36" name="updated_at">
+    <column id="60" parent="35" name="updated_at">
       <Position>4</Position>
       <DataType>timestamp|0s</DataType>
-      <StateNumber>72196</StateNumber>
+      <StateNumber>72324</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="68" parent="36" name="content">
+    <column id="61" parent="35" name="content">
       <Position>5</Position>
       <DataType>text|0s</DataType>
-      <StateNumber>72196</StateNumber>
+      <StateNumber>72324</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="69" parent="36" name="like_count">
+    <column id="62" parent="35" name="like_count">
       <Position>6</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>72196</StateNumber>
+      <StateNumber>72324</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="70" parent="36" name="title">
+    <column id="63" parent="35" name="title">
       <Position>7</Position>
       <DataType>varchar(255)|0s</DataType>
-      <StateNumber>72196</StateNumber>
+      <StateNumber>72324</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="71" parent="36" name="article_pkey">
-      <ObjectId>1841080</ObjectId>
-      <StateNumber>72196</StateNumber>
+    <column id="64" parent="35" name="author_id">
+      <Position>8</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <StateNumber>72324</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="65" parent="35" name="article_pkey">
+      <ObjectId>1841445</ObjectId>
+      <StateNumber>72324</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
@@ -1249,115 +1206,91 @@ UC/10
       <CollationNames>default</CollationNames>
       <ClassIds>3126</ClassIds>
     </index>
-    <key id="72" parent="36" name="article_pkey">
-      <ObjectId>1841081</ObjectId>
-      <StateNumber>72196</StateNumber>
+    <key id="66" parent="35" name="article_pkey">
+      <ObjectId>1841446</ObjectId>
+      <StateNumber>72324</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>article_pkey</UnderlyingIndexName>
     </key>
-    <column id="73" parent="37" name="article_id">
-      <Position>1</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>72197</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="74" parent="37" name="authors_id">
-      <Position>2</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>72197</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <foreign-key id="75" parent="37" name="fkspag2w8eoclck7kfq9nhd2g88">
-      <ObjectId>1841145</ObjectId>
-      <StateNumber>72209</StateNumber>
-      <ColNames>article_id</ColNames>
-      <RefTableId>1841074</RefTableId>
-      <RefColPositions>1</RefColPositions>
-      <RefTableName>article</RefTableName>
-      <RefKeyName>article_pkey</RefKeyName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
-    <foreign-key id="76" parent="37" name="fk4cx2yo83tped2dgnjaxi556g6">
-      <ObjectId>1841140</ObjectId>
-      <StateNumber>72208</StateNumber>
-      <ColNames>authors_id</ColNames>
-      <RefTableId>1841054</RefTableId>
+    <foreign-key id="67" parent="35" name="fkfgsbsq4w4xprhnpr9lgdmntlg">
+      <ObjectId>1841481</ObjectId>
+      <StateNumber>72332</StateNumber>
+      <ColNames>author_id</ColNames>
+      <RefTableId>1841431</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>app_user</RefTableName>
       <RefKeyName>app_user_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="77" parent="38" name="article_id">
+    <column id="68" parent="36" name="article_id">
       <Position>1</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>72198</StateNumber>
+      <StateNumber>72325</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="78" parent="38" name="categories_id">
+    <column id="69" parent="36" name="categories_id">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>72198</StateNumber>
+      <StateNumber>72325</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <foreign-key id="79" parent="38" name="fk2574p9xuuvh3pxhlfvq6f7rbf">
-      <ObjectId>1841155</ObjectId>
-      <StateNumber>72211</StateNumber>
+    <foreign-key id="70" parent="36" name="fk2574p9xuuvh3pxhlfvq6f7rbf">
+      <ObjectId>1841491</ObjectId>
+      <StateNumber>72334</StateNumber>
       <ColNames>article_id</ColNames>
-      <RefTableId>1841074</RefTableId>
+      <RefTableId>1841439</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>article</RefTableName>
       <RefKeyName>article_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="80" parent="38" name="fkojn3kggha3c6fptgfv60b68vu">
-      <ObjectId>1841150</ObjectId>
-      <StateNumber>72210</StateNumber>
+    <foreign-key id="71" parent="36" name="fkojn3kggha3c6fptgfv60b68vu">
+      <ObjectId>1841486</ObjectId>
+      <StateNumber>72333</StateNumber>
       <ColNames>categories_id</ColNames>
-      <RefTableId>1841094</RefTableId>
+      <RefTableId>1841453</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>category</RefTableName>
       <RefKeyName>category_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="81" parent="39" name="id">
+    <column id="72" parent="37" name="id">
       <Position>1</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>72199</StateNumber>
+      <StateNumber>72326</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="82" parent="39" name="created_at">
+    <column id="73" parent="37" name="created_at">
       <Position>2</Position>
       <DataType>timestamp|0s</DataType>
-      <StateNumber>72199</StateNumber>
+      <StateNumber>72326</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="83" parent="39" name="state">
+    <column id="74" parent="37" name="state">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
-      <StateNumber>72199</StateNumber>
+      <StateNumber>72326</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="84" parent="39" name="updated_at">
+    <column id="75" parent="37" name="updated_at">
       <Position>4</Position>
       <DataType>timestamp|0s</DataType>
-      <StateNumber>72199</StateNumber>
+      <StateNumber>72326</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="85" parent="39" name="name">
+    <column id="76" parent="37" name="name">
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
-      <StateNumber>72199</StateNumber>
+      <StateNumber>72326</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="86" parent="39" name="category_pkey">
-      <ObjectId>1841100</ObjectId>
-      <StateNumber>72199</StateNumber>
+    <index id="77" parent="37" name="category_pkey">
+      <ObjectId>1841459</ObjectId>
+      <StateNumber>72326</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
@@ -1366,59 +1299,59 @@ UC/10
       <CollationNames>default</CollationNames>
       <ClassIds>3126</ClassIds>
     </index>
-    <key id="87" parent="39" name="category_pkey">
-      <ObjectId>1841101</ObjectId>
-      <StateNumber>72199</StateNumber>
+    <key id="78" parent="37" name="category_pkey">
+      <ObjectId>1841460</ObjectId>
+      <StateNumber>72326</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>category_pkey</UnderlyingIndexName>
     </key>
-    <column id="88" parent="40" name="id">
+    <column id="79" parent="38" name="id">
       <Position>1</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>72200</StateNumber>
+      <StateNumber>72327</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="89" parent="40" name="created_at">
+    <column id="80" parent="38" name="created_at">
       <Position>2</Position>
       <DataType>timestamp|0s</DataType>
-      <StateNumber>72200</StateNumber>
+      <StateNumber>72327</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="90" parent="40" name="state">
+    <column id="81" parent="38" name="state">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
-      <StateNumber>72200</StateNumber>
+      <StateNumber>72327</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="91" parent="40" name="updated_at">
+    <column id="82" parent="38" name="updated_at">
       <Position>4</Position>
       <DataType>timestamp|0s</DataType>
-      <StateNumber>72200</StateNumber>
+      <StateNumber>72327</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="92" parent="40" name="content">
+    <column id="83" parent="38" name="content">
       <Position>5</Position>
       <DataType>text|0s</DataType>
-      <StateNumber>72200</StateNumber>
+      <StateNumber>72327</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="93" parent="40" name="article_id">
+    <column id="84" parent="38" name="article_id">
       <Position>6</Position>
       <DataType>varchar(255)|0s</DataType>
-      <StateNumber>72200</StateNumber>
+      <StateNumber>72327</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="94" parent="40" name="author_id">
+    <column id="85" parent="38" name="author_id">
       <Position>7</Position>
       <DataType>varchar(255)|0s</DataType>
-      <StateNumber>72200</StateNumber>
+      <StateNumber>72327</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="95" parent="40" name="comment_pkey">
-      <ObjectId>1841108</ObjectId>
-      <StateNumber>72200</StateNumber>
+    <index id="86" parent="38" name="comment_pkey">
+      <ObjectId>1841467</ObjectId>
+      <StateNumber>72327</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
@@ -1427,91 +1360,42 @@ UC/10
       <CollationNames>default</CollationNames>
       <ClassIds>3126</ClassIds>
     </index>
-    <key id="96" parent="40" name="comment_pkey">
-      <ObjectId>1841109</ObjectId>
-      <StateNumber>72200</StateNumber>
+    <key id="87" parent="38" name="comment_pkey">
+      <ObjectId>1841468</ObjectId>
+      <StateNumber>72327</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>comment_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="97" parent="40" name="fk5yx0uphgjc6ik6hb82kkw501y">
-      <ObjectId>1841160</ObjectId>
-      <StateNumber>72212</StateNumber>
+    <foreign-key id="88" parent="38" name="fk5yx0uphgjc6ik6hb82kkw501y">
+      <ObjectId>1841496</ObjectId>
+      <StateNumber>72335</StateNumber>
       <ColNames>article_id</ColNames>
-      <RefTableId>1841074</RefTableId>
+      <RefTableId>1841439</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>article</RefTableName>
       <RefKeyName>article_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="98" parent="40" name="fkemqjawvkiyejurssvwm5c21y7">
-      <ObjectId>1841165</ObjectId>
-      <StateNumber>72213</StateNumber>
+    <foreign-key id="89" parent="38" name="fkemqjawvkiyejurssvwm5c21y7">
+      <ObjectId>1841501</ObjectId>
+      <StateNumber>72336</StateNumber>
       <ColNames>author_id</ColNames>
-      <RefTableId>1841054</RefTableId>
+      <RefTableId>1841431</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>app_user</RefTableName>
       <RefKeyName>app_user_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="99" parent="41" name="id">
-      <Position>1</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>72201</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="100" parent="41" name="created_at">
-      <Position>2</Position>
-      <DataType>timestamp|0s</DataType>
-      <StateNumber>72201</StateNumber>
-      <TypeId>1114</TypeId>
-    </column>
-    <column id="101" parent="41" name="state">
-      <Position>3</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <StateNumber>72201</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="102" parent="41" name="updated_at">
-      <Position>4</Position>
-      <DataType>timestamp|0s</DataType>
-      <StateNumber>72201</StateNumber>
-      <TypeId>1114</TypeId>
-    </column>
-    <column id="103" parent="41" name="name">
-      <Position>5</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <StateNumber>72201</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <index id="104" parent="41" name="role_pkey">
-      <ObjectId>1841116</ObjectId>
-      <StateNumber>72201</StateNumber>
-      <ColNames>id</ColNames>
-      <Unique>1</Unique>
-      <Primary>1</Primary>
-      <AccessMethodId>403</AccessMethodId>
-      <CollationIds>100</CollationIds>
-      <CollationNames>default</CollationNames>
-      <ClassIds>3126</ClassIds>
-    </index>
-    <key id="105" parent="41" name="role_pkey">
-      <ObjectId>1841117</ObjectId>
-      <StateNumber>72201</StateNumber>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>role_pkey</UnderlyingIndexName>
-    </key>
-    <argument id="106" parent="42">
+    <argument id="90" parent="39">
       <Position>1</Position>
       <DataType>text|0s</DataType>
     </argument>
-    <argument id="107" parent="42">
+    <argument id="91" parent="39">
       <Position>2</Position>
       <DataType>text|0s</DataType>
     </argument>
-    <argument id="108" parent="42">
+    <argument id="92" parent="39">
       <ArgumentDirection>R</ArgumentDirection>
       <DataType>boolean|0s</DataType>
     </argument>

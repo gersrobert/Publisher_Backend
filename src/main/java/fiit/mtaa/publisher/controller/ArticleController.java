@@ -39,12 +39,12 @@ public class ArticleController extends AbstractController{
     }
 
     @DeleteMapping("/{articleId}")
-    public ResponseEntity deleteArticle(@PathVariable String articleId) {
+    public ResponseEntity<?> deleteArticle(@PathVariable String articleId) {
         throw new RuntimeException("Not yet implemented");
     }
 
     @PostMapping(value = "/comment", headers = "Accept=application/json", produces = "application/json")
-    public ResponseEntity insertComment(@RequestBody CommentInsertDTO comment) {
+    public ResponseEntity<?> insertComment(@RequestBody CommentInsertDTO comment) {
         throw new RuntimeException("Not yet implemented");
     }
 
@@ -55,11 +55,6 @@ public class ArticleController extends AbstractController{
 
     @PutMapping(value = "/{articleId}/unlike")
     public ResponseEntity<Integer> unlikeArticle(@RequestHeader("Auth-Token") String userId, @PathVariable String articleId) {
-        throw new RuntimeException("Not yet implemented");
-    }
-
-    @GetMapping(value = "/{articleId}/export")
-    public ResponseEntity<DataDTO> exportArticle(@PathVariable String articleId) {
         throw new RuntimeException("Not yet implemented");
     }
 }
