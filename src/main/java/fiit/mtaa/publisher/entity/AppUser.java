@@ -23,6 +23,9 @@ public class AppUser extends AbstractEntity {
 
     protected byte[] photo;
 
+    @OneToMany(mappedBy = "article", cascade=CascadeType.PERSIST)
+    protected List<Comment> comments;
+
     public String getUserName() {
         return userName;
     }
