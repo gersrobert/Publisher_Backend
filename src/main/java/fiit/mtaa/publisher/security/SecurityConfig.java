@@ -40,12 +40,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        // http.authorizeRequests()
-        //         .mvcMatchers("/api/public").permitAll()
-        //         .mvcMatchers("/api/private").authenticated()
-        //         .mvcMatchers("/api/private-scoped").hasAuthority("SCOPE_read:messages")
-        //         .and().cors()
-        //         .and().oauth2ResourceServer().jwt();
         http.authorizeRequests()
                 .mvcMatchers("/user/test1").permitAll()
                 .mvcMatchers("/user/test2").authenticated()
