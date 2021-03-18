@@ -58960,31 +58960,37 @@ r/10
     </operator-class>
     <table id="4898" parent="20" name="app_user">
       <ObjectId>1841513</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>postgres</Owner>
       <StateNumber>72386</StateNumber>
     </table>
     <table id="4899" parent="20" name="app_user_liked_articles">
       <ObjectId>1841507</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>postgres</Owner>
       <StateNumber>72377</StateNumber>
     </table>
     <table id="4900" parent="20" name="article">
       <ObjectId>1841521</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>postgres</Owner>
       <StateNumber>72377</StateNumber>
     </table>
     <table id="4901" parent="20" name="article_categories">
       <ObjectId>1841529</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>postgres</Owner>
       <StateNumber>72380</StateNumber>
     </table>
     <table id="4902" parent="20" name="category">
       <ObjectId>1841535</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>postgres</Owner>
       <StateNumber>72380</StateNumber>
     </table>
     <table id="4903" parent="20" name="comment">
       <ObjectId>1841543</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>postgres</Owner>
       <StateNumber>72382</StateNumber>
     </table>

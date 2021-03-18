@@ -22,7 +22,6 @@ public abstract class AbstractEntity {
 	@Type(type = "uuid-char")
 	protected UUID id;
 
-	@CreationTimestamp
 	protected LocalDateTime createdAt;
 
 	@UpdateTimestamp
@@ -36,6 +35,10 @@ public abstract class AbstractEntity {
 
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
 	}
 
 	public LocalDateTime getUpdatedAt() {
@@ -61,5 +64,12 @@ public abstract class AbstractEntity {
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
+	}
+
+	@PrePersist
+	void onCreate() {
+		if (this.createdAt == null) {
+			this.setCreatedAt(LocalDateTime.now());
+		}
 	}
 }
