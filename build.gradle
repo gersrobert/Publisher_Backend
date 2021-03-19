@@ -40,3 +40,7 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
+
+bootRun {
+  args = ["--spring.profiles.active=${project.properties['profile'] ?: 'prod'}"]
+}
