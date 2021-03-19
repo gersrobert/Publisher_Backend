@@ -1,6 +1,7 @@
 package fiit.mtaa.publisher.dto;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 public class ArticleSimpleDTO extends AbstractDTO {
@@ -8,7 +9,7 @@ public class ArticleSimpleDTO extends AbstractDTO {
 	protected String title;
 	protected LocalDateTime createdAt;
 	protected AppUserDTO author;
-	protected Set<CategoryDTO> categories;
+	protected List<CategoryDTO> categories;
 	protected int likeCount;
 	protected boolean liked;
 
@@ -36,11 +37,11 @@ public class ArticleSimpleDTO extends AbstractDTO {
 		this.author = author;
 	}
 
-	public Set<CategoryDTO> getCategories() {
+	public List<CategoryDTO> getCategories() {
 		return categories;
 	}
 
-	public void setCategories(Set<CategoryDTO> categories) {
+	public void setCategories(List<CategoryDTO> categories) {
 		this.categories = categories;
 	}
 

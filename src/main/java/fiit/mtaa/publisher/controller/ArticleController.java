@@ -1,10 +1,15 @@
 package fiit.mtaa.publisher.controller;
 
+import fiit.mtaa.publisher.bl.service.ArticleService;
 import fiit.mtaa.publisher.dto.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.persistence.EntityNotFoundException;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(path = "/article")
@@ -12,9 +17,22 @@ public class ArticleController extends AbstractController{
 
     Logger logger = LoggerFactory.getLogger(ArticleController.class);
 
+    @Autowired
+    private ArticleService articleService;
+
     @GetMapping("/{id}")
     public ResponseEntity<ArticleDetailedDTO> getArticleById(@PathVariable String id, @RequestHeader("Auth-Token") String userId) {
-        throw new RuntimeException("Not yet implemented");
+        ArticleDetailedDTO article;
+        try {
+            article = articleService.getById(UUID.fromString(id));
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(404).build();
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return ResponseEntity.status(500).build();
+        }
+
+        return ResponseEntity.ok(article);
     }
 
     @GetMapping("")
@@ -25,7 +43,22 @@ public class ArticleController extends AbstractController{
             @RequestParam(required = false, defaultValue = "0") Integer lowerIndex,
             @RequestParam(required = false, defaultValue = "-1") Integer upperIndex) {
 
-        throw new RuntimeException("Not yet implemented");
+        var filter = new FilterCriteria();
+        filter.setAuthor(author);
+        filter.setTitle(title);
+        filter.setCategory(category);
+        filter.setLowerIndex(lowerIndex);
+        filter.setUpperIndex(upperIndex);
+
+        ArticleSimpleListDTO articles;
+        try {
+            articles = articleService.getFiltered(filter);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return ResponseEntity.status(500).build();
+        }
+
+        return ResponseEntity.ok(articles);
     }
 
     @PostMapping(value = "", headers = "Accept=application/json", produces = "application/json")
