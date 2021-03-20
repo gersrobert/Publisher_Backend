@@ -6,8 +6,8 @@ public class FilterCriteria {
 	protected String title;
 	protected String category;
 	protected String publisher;
-	protected int lowerIndex;
-	protected int upperIndex;
+	protected int page;
+	protected int pageSize;
 
 	public String getAuthor() {
 		return author;
@@ -41,19 +41,19 @@ public class FilterCriteria {
 		this.publisher = publisher;
 	}
 
-	public int getLowerIndex() {
-		return lowerIndex;
+	public int getPage() {
+		return page;
 	}
 
-	public void setLowerIndex(int lowerIndex) {
-		this.lowerIndex = lowerIndex;
+	public void setPage(int page) {
+		this.page = page;
 	}
 
-	public int getUpperIndex() {
-		return upperIndex;
+	public int getPageSize() {
+		return pageSize;
 	}
 
-	public void setUpperIndex(int upperIndex) {
-		this.upperIndex = upperIndex;
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
 	}
 }

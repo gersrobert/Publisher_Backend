@@ -5,6 +5,7 @@ import fiit.mtaa.publisher.dto.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,29 +37,27 @@ public class ArticleController extends AbstractController{
     }
 
     @GetMapping("")
-    public ResponseEntity<ArticleSimpleListDTO> getArticles(@RequestHeader("Auth-Token") String userId,
-            @RequestParam(required = false, defaultValue = "") String author,
-            @RequestParam(required = false, defaultValue = "") String title,
-            @RequestParam(required = false, defaultValue = "") String category,
-            @RequestParam(required = false, defaultValue = "0") Integer lowerIndex,
-            @RequestParam(required = false, defaultValue = "-1") Integer upperIndex) {
+    public ResponseEntity<Page<ArticleSimpleDTO>> getArticles(@RequestHeader("Auth-Token") String userId,
+                                                              @RequestParam(required = false, defaultValue = "") String author,
+                                                              @RequestParam(required = false, defaultValue = "") String title,
+                                                              @RequestParam(required = false, defaultValue = "") String category,
+                                                              @RequestParam(required = false, defaultValue = "0") Integer page,
+                                                              @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
 
         var filter = new FilterCriteria();
         filter.setAuthor(author);
         filter.setTitle(title);
         filter.setCategory(category);
-        filter.setLowerIndex(lowerIndex);
-        filter.setUpperIndex(upperIndex);
+        filter.setPage(page);
+        filter.setPageSize(pageSize);
 
-        ArticleSimpleListDTO articles;
         try {
-            articles = articleService.getFiltered(filter);
+            var articles = articleService.getFiltered(filter);
+            return ResponseEntity.ok(articles);
         } catch (Exception e) {
             logger.error(e.getMessage());
             return ResponseEntity.status(500).build();
         }
-
-        return ResponseEntity.ok(articles);
     }
 
     @PostMapping(value = "", headers = "Accept=application/json", produces = "application/json")

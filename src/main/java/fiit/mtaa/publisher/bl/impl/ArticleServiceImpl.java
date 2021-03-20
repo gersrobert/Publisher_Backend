@@ -1,15 +1,19 @@
 package fiit.mtaa.publisher.bl.impl;
 
-import fiit.mtaa.publisher.bl.repo.ArticleRepository;
+import fiit.mtaa.publisher.repository.ArticleRepository;
 import fiit.mtaa.publisher.bl.service.ArticleService;
 import fiit.mtaa.publisher.dto.*;
-import fiit.mtaa.publisher.entity.Article;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 import java.util.stream.Collectors;
+
+import static fiit.mtaa.publisher.repository.ArticleRepository.*;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -30,7 +34,7 @@ public class ArticleServiceImpl implements ArticleService {
         dto.setContent(entity.getContent());
         dto.setCreatedAt(entity.getCreatedAt());
         dto.setId(entity.getId().toString());
-        dto.setLikeCount(entity.getLikeCount() + entity.getLikedUsers().size());
+        dto.setLikeCount(entity.getLikeCount());
         dto.setComments(entity.getComments().stream().map(c -> modelMapper.map(c, CommentDTO.class)).collect(Collectors.toList()));
         dto.setCategories(entity.getCategories().stream().map(c -> modelMapper.map(c, CategoryDTO.class)).collect(Collectors.toList()));
 
@@ -38,27 +42,23 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public ArticleSimpleListDTO getFiltered(FilterCriteria filterCriteria) {
-        Article exampleArticle = new Article();
-        exampleArticle.setTitle("15 inspiring 'Game of Thrones' quotes to live by");
+    public Page<ArticleSimpleDTO> getFiltered(FilterCriteria filterCriteria) {
+        var entities = articleRepository.findAll(
+                hasAuthor(filterCriteria.getAuthor())
+                .and(hasTitle(filterCriteria.getTitle()))
+                .and(hasCategory(filterCriteria.getCategory())),
+                PageRequest.of(filterCriteria.getPage(), filterCriteria.getPageSize(), Sort.by("likeCount").descending())
+        );
 
-        var entities = articleRepository.findAll();
-
-        var dtos = entities.stream().map(entity -> {
+        return entities.map(entity -> {
             var article = new ArticleSimpleDTO();
             article.setAuthor(modelMapper.map(entity.getAuthor(), AppUserDTO.class));
             article.setTitle(entity.getTitle());
             article.setCreatedAt(entity.getCreatedAt());
             article.setId(entity.getId().toString());
-            article.setLikeCount(entity.getLikeCount() + entity.getLikedUsers().size());
+            article.setLikeCount(entity.getLikeCount());
             article.setCategories(entity.getCategories().stream().map(c -> modelMapper.map(c, CategoryDTO.class)).collect(Collectors.toList()));
             return article;
-        }).collect(Collectors.toList());
-
-        var response = new ArticleSimpleListDTO();
-        response.setArticles(dtos);
-        response.setHasMore(false);
-
-        return response;
+        });
     }
 }
