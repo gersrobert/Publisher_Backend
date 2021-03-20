@@ -53,6 +53,8 @@ public class InitDbService {
 
     @PostConstruct
     protected void initialize() {
+        logger.info("Starting initDb");
+
         TransactionStatus transaction = transactionManager.getTransaction(new DefaultTransactionDefinition());
 
         try {
@@ -68,6 +70,7 @@ public class InitDbService {
             AppUser user = new AppUser();
             user.setFirstName(faker.name().firstName());
             user.setLastName(faker.name().lastName());
+            user.setUserName(faker.name().username());
             users.add(user);
             entityManager.persist(user);
         }
@@ -103,6 +106,8 @@ public class InitDbService {
 
         entityManager.flush();
         transactionManager.commit(transaction);
+
+        logger.info("Finished initDb");
     }
 
 }

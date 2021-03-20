@@ -72,7 +72,15 @@ public class ArticleController extends AbstractController{
 
     @DeleteMapping("/{articleId}")
     public ResponseEntity<?> deleteArticle(@PathVariable String articleId) {
-        throw new RuntimeException("Not yet implemented");
+        try {
+            articleService.deleteArticle(UUID.fromString(articleId));
+            return ResponseEntity.ok().build();
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(404).build();
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return ResponseEntity.status(500).build();
+        }
     }
 
     @PostMapping(value = "/comment", headers = "Accept=application/json", produces = "application/json")
