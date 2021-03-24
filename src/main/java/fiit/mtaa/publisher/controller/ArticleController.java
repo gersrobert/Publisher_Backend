@@ -22,7 +22,7 @@ public class ArticleController extends AbstractController{
     private ArticleService articleService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<ArticleDetailedDTO> getArticleById(@PathVariable String id, @RequestHeader("Auth-Token") String userId) {
+    public ResponseEntity<ArticleDetailedDTO> getArticleById(@PathVariable String id) {
         ArticleDetailedDTO article;
         try {
             article = articleService.getById(UUID.fromString(id));
@@ -37,8 +37,7 @@ public class ArticleController extends AbstractController{
     }
 
     @GetMapping("")
-    public ResponseEntity<Page<ArticleSimpleDTO>> getArticles(@RequestHeader("Auth-Token") String userId,
-                                                              @RequestParam(required = false, defaultValue = "") String author,
+    public ResponseEntity<Page<ArticleSimpleDTO>> getArticles(@RequestParam(required = false, defaultValue = "") String author,
                                                               @RequestParam(required = false, defaultValue = "") String title,
                                                               @RequestParam(required = false, defaultValue = "") String category,
                                                               @RequestParam(required = false, defaultValue = "0") Integer page,
