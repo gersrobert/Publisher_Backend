@@ -7,5 +7,6 @@ import java.util.UUID;
 
 public interface UserRepository extends JpaRepository<AppUser, UUID> {
 	AppUser getFirstByUserName(String userName);
-	AppUser getFirstByUserNameAndPasswordHash(String userName, String passwordHash);
+	// AppUser getFirstByUserNameAndPasswordHash(String userName, String passwordHash);
+    AppUser getFirstBySubject(String subject);
 }

@@ -2,7 +2,6 @@ package fiit.mtaa.publisher.controller;
 
 import fiit.mtaa.publisher.bl.service.UserService;
 import fiit.mtaa.publisher.dto.AppUserDTO;
-import fiit.mtaa.publisher.dto.AppUserWithPasswordDTO;
 import fiit.mtaa.publisher.dto.LoginRequestDTO;
 import fiit.mtaa.publisher.exception.InternalServerException;
 
@@ -36,35 +35,6 @@ public class UserController extends AbstractController {
 		throw new RuntimeException("Not yet implemented");
 	}
 
-	@PostMapping(value = "/register")
-	public ResponseEntity registerUser(@RequestBody AppUserWithPasswordDTO user) {
-		boolean response = true;
-
-		System.out.println(user.getPasswordHash());
-		try {
-			response = userService.registerAppUser(user);
-		} catch (Exception e) {
-			logger.error("Error registering user", e);
-			throw new InternalServerException(e);
-		}
-
-		if (response) {
-			return new ResponseEntity(HttpStatus.CREATED);
-		} else {
-			return new ResponseEntity(HttpStatus.FORBIDDEN);
-		}
-	}
-
-
-	// public ResponseEntity<AppUserDTO> getTest() {
-	// 
-	// AppUserDTO response = new AppUserDTO();
-	// response.setFirstName("firstName");
-	// response.setLastName("lastName");
-	// response.setUserName("userName");
-	// response.setId("id");
-
-	// return ResponseEntity.of(Optional.of(response));
 	@GetMapping(value = "/test1")
 	public ResponseEntity getTest1() {
 		System.out.println("test1 successful");

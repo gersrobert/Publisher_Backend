@@ -5,15 +5,24 @@ import java.util.List;
 
 @Entity
 public class AppUser extends AbstractEntity {
+    // protected String sub;
+	// protected String givenName;
+	// protected String familyName;
+	// protected String nickname;
+	// protected String name;
+	// protected String picture;
+	// protected String locale;
+	// protected String updatedAt;
 
     @Column(unique = true)
+    protected String subject;
+
     protected String userName;
 
     protected String firstName;
 
     protected String lastName;
 
-    protected String passwordHash;
 
     @ManyToMany
     @JoinTable(name = "app_user_liked_articles",
@@ -25,6 +34,14 @@ public class AppUser extends AbstractEntity {
 
     @OneToMany(mappedBy = "article", cascade=CascadeType.PERSIST)
     protected List<Comment> comments;
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
 
     public String getUserName() {
         return userName;
@@ -48,14 +65,6 @@ public class AppUser extends AbstractEntity {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
     }
 
     public List<Article> getLikedArticles() {
