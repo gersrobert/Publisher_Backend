@@ -1,8 +1,6 @@
 package fiit.mtaa.publisher.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.Index;
-import javax.persistence.Table;
 
 @Entity
 public class Category extends AbstractEntity {

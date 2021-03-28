@@ -2,7 +2,6 @@ package fiit.mtaa.publisher.dto;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 public class ArticleSimpleDTO extends AbstractDTO {
 
