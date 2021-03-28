@@ -1,12 +1,10 @@
 package fiit.mtaa.publisher.bl.service;
 
+import fiit.mtaa.publisher.entity.AppUser;
 import org.springframework.security.oauth2.jwt.Jwt;
 
 public interface UserService {
-    // /**
-    //  * Create a new user
-    //  * @param user dto containing user data
-    //  * @return true is successful
-    //  */
-    void checkIfUserExists(Jwt accessToken);
+
+    AppUser checkIfUserExists(String accessToken);
+    AppUser checkIfUserExists(Jwt accessToken);
 }

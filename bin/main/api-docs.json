@@ -19,7 +19,7 @@
         "operationId": "unlikeArticle",
         "parameters": [
           {
-            "name": "Auth-Token",
+            "name": "Authorization",
             "in": "header",
             "required": true,
             "schema": {
@@ -67,7 +67,7 @@
         "operationId": "likeArticle",
         "parameters": [
           {
-            "name": "Auth-Token",
+            "name": "Authorization",
             "in": "header",
             "required": true,
             "schema": {
@@ -115,7 +115,7 @@
         "operationId": "getArticles",
         "parameters": [
           {
-            "name": "Auth-Token",
+            "name": "Authorization",
             "in": "header",
             "required": true,
             "schema": {
@@ -586,7 +586,7 @@
             }
           },
           {
-            "name": "Auth-Token",
+            "name": "Authorization",
             "in": "header",
             "required": true,
             "schema": {

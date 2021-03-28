@@ -6,6 +6,7 @@ import fiit.mtaa.publisher.entity.AppUser;
 import fiit.mtaa.publisher.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -28,22 +29,43 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private JwtDecoder jwtDecoder;
+
     private RestTemplate restTemplate;
+
     @Autowired
     public void RestTemplateBuilder(RestTemplateBuilder builder) {
         this.restTemplate = builder.build();
     }
 
     @Override
-    public void checkIfUserExists(Jwt accessToken) {
+    public AppUser checkIfUserExists(String accessToken) {
+        if (accessToken == null || accessToken.isEmpty()) {
+            return null;
+        }
+
+        Jwt token;
+        if (accessToken.startsWith("Bearer")) {
+            token = jwtDecoder.decode(accessToken.split(" ")[1]);
+        } else {
+            token = jwtDecoder.decode(accessToken);
+        }
+
+        return checkIfUserExists(token);
+    }
+
+    @Override
+    public AppUser checkIfUserExists(Jwt accessToken) {
         AppUser alreadyExists = userRepository.getFirstBySubject(accessToken.getSubject());
     	if (alreadyExists == null) {
-            createUser(accessToken);
+            alreadyExists = createUser(accessToken);
         }
+    	return alreadyExists;
     }
 
     @Transactional
-    private void createUser(Jwt accessToken) {
+    protected AppUser createUser(Jwt accessToken) {
         String url = "https://a3cle-publisher.eu.auth0.com/userinfo";
     
         HttpHeaders headers = new HttpHeaders();
@@ -76,5 +98,6 @@ public class UserServiceImpl implements UserService {
         newUser.setUserName(userinfo.getNickname());
 
         userRepository.save(newUser);
+        return newUser;
     }
 }

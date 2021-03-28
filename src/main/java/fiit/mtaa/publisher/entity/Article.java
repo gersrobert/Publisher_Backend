@@ -24,7 +24,10 @@ public class Article extends AbstractEntity {
     @ManyToOne
     protected AppUser author;
 
-    @ManyToMany(mappedBy = "likedArticles")
+    @ManyToMany
+    @JoinTable(name = "app_user_liked_articles",
+            joinColumns = { @JoinColumn(name = "article_id") },
+            inverseJoinColumns = { @JoinColumn(name = "user_id") })
     protected List<AppUser> likedUsers;
 
     @Transient

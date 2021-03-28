@@ -1,5 +1,7 @@
 package fiit.mtaa.publisher.bl.impl;
 
+import fiit.mtaa.publisher.entity.AppUser;
+import fiit.mtaa.publisher.exception.ConflictException;
 import fiit.mtaa.publisher.repository.ArticleRepository;
 import fiit.mtaa.publisher.bl.service.ArticleService;
 import fiit.mtaa.publisher.dto.*;
@@ -10,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -25,7 +28,7 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleRepository articleRepository;
 
     @Override
-    public ArticleDetailedDTO getById(UUID id) {
+    public ArticleDetailedDTO getById(UUID id, AppUser currentUser) {
         var entity = articleRepository.getOne(id);
 
         ArticleDetailedDTO dto = new ArticleDetailedDTO();
@@ -38,11 +41,17 @@ public class ArticleServiceImpl implements ArticleService {
         dto.setComments(entity.getComments().stream().map(c -> modelMapper.map(c, CommentDTO.class)).collect(Collectors.toList()));
         dto.setCategories(entity.getCategories().stream().map(c -> modelMapper.map(c, CategoryDTO.class)).collect(Collectors.toList()));
 
+        if (currentUser != null) {
+            dto.setLiked(
+                    entity.getLikedUsers().contains(currentUser)
+            );
+        }
+
         return dto;
     }
 
     @Override
-    public Page<ArticleSimpleDTO> getFiltered(FilterCriteria filterCriteria) {
+    public Page<ArticleSimpleDTO> getFiltered(FilterCriteria filterCriteria, AppUser currentUser) {
         var entities = articleRepository.findAll(
                 hasAuthor(filterCriteria.getAuthor())
                 .and(hasTitle(filterCriteria.getTitle()))
@@ -58,6 +67,13 @@ public class ArticleServiceImpl implements ArticleService {
             article.setId(entity.getId().toString());
             article.setLikeCount(entity.getLikeCount());
             article.setCategories(entity.getCategories().stream().map(c -> modelMapper.map(c, CategoryDTO.class)).collect(Collectors.toList()));
+
+            if (currentUser != null) {
+                article.setLiked(
+                        entity.getLikedUsers().contains(currentUser)
+                );
+            }
+
             return article;
         });
     }
@@ -75,5 +91,30 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public void deleteArticle(UUID id) {
         articleRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void likeArticle(UUID id, AppUser user) {
+        var article = articleRepository.getOne(id);
+        if (article.getLikedUsers().contains(user)) {
+            throw new ConflictException();
+        }
+
+        article.getLikedUsers().add(user);
+        article.setLikeCount(article.getLikeCount() + 1);
+        articleRepository.save(article);
+    }
+
+    @Override
+    public void unlikeArticle(UUID id, AppUser user) {
+        var article = articleRepository.getOne(id);
+        if (!article.getLikedUsers().contains(user)) {
+            throw new ConflictException();
+        }
+
+        article.getLikedUsers().remove(user);
+        article.setLikeCount(article.getLikeCount() - 1);
+        articleRepository.save(article);
     }
 }
