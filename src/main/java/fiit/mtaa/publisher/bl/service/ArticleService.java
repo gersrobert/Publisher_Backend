@@ -3,6 +3,7 @@ package fiit.mtaa.publisher.bl.service;
 import fiit.mtaa.publisher.dto.ArticleDetailedDTO;
 import fiit.mtaa.publisher.dto.ArticleInsertDTO;
 import fiit.mtaa.publisher.dto.ArticleSimpleDTO;
+import fiit.mtaa.publisher.dto.CommentInsertDTO;
 import fiit.mtaa.publisher.dto.FilterCriteria;
 import fiit.mtaa.publisher.entity.AppUser;
 import org.springframework.data.domain.Page;
@@ -21,6 +22,8 @@ public interface ArticleService {
     UUID updateArticle(UUID id, ArticleInsertDTO articleInsertDTO, AppUser user);
 
     void deleteArticle(UUID id, AppUser user);
+
+    void insertComment(UUID id, CommentInsertDTO comment, AppUser user);
 
     void likeArticle(UUID id, AppUser user);
 

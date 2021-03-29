@@ -3,9 +3,11 @@ package fiit.mtaa.publisher.bl.impl;
 import fiit.mtaa.publisher.entity.AppUser;
 import fiit.mtaa.publisher.entity.Article;
 import fiit.mtaa.publisher.entity.Category;
+import fiit.mtaa.publisher.entity.Comment;
 import fiit.mtaa.publisher.exception.ConflictException;
 import fiit.mtaa.publisher.repository.ArticleRepository;
 import fiit.mtaa.publisher.repository.CategoryRepository;
+import fiit.mtaa.publisher.repository.CommentRepository;
 import fiit.mtaa.publisher.repository.UserRepository;
 import fiit.mtaa.publisher.bl.service.ArticleService;
 import fiit.mtaa.publisher.dto.*;
@@ -18,6 +20,9 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -34,6 +39,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private CommentRepository commentRepository;
 
     @Autowired
     private CategoryRepository categoryRepository;
@@ -94,8 +102,9 @@ public class ArticleServiceImpl implements ArticleService {
     public UUID insertArticle(ArticleInsertDTO articleInsertDTO, AppUser user) {
         Article article = new Article();
 
-        article.setTitle(articleInsertDTO.getTitle());
-        article.setCategories(articleInsertDTO.getCategories().stream().map(categoryName -> {
+        List<Category> categories = new ArrayList<Category>();
+
+        for (String categoryName : articleInsertDTO.getCategories()) {
             Category category = categoryRepository.getFirstByName(categoryName);
             
             if (category == null) {
@@ -104,8 +113,13 @@ public class ArticleServiceImpl implements ArticleService {
                 categoryRepository.save(category);
             }
             
-            return category;
-        }).collect(Collectors.toList()));
+            if (!categories.contains(category)) {
+                categories.add(category);
+            }
+        }
+
+        article.setTitle(articleInsertDTO.getTitle());
+        article.setCategories(categories);
         article.setContent(articleInsertDTO.getContent());
         article.setAuthor(user);
         articleRepository.save(article);
@@ -122,8 +136,10 @@ public class ArticleServiceImpl implements ArticleService {
             return null;
         }
 
-        article.setTitle(articleInsertDTO.getTitle());
-        article.setCategories(articleInsertDTO.getCategories().stream().map(categoryName -> {
+
+        List<Category> categories = new ArrayList<Category>();
+
+        for (String categoryName : articleInsertDTO.getCategories()) {
             Category category = categoryRepository.getFirstByName(categoryName);
             
             if (category == null) {
@@ -132,8 +148,13 @@ public class ArticleServiceImpl implements ArticleService {
                 categoryRepository.save(category);
             }
             
-            return category;
-        }).collect(Collectors.toList()));
+            if (!categories.contains(category)) {
+                categories.add(category);
+            }
+        }
+
+        article.setTitle(articleInsertDTO.getTitle());
+        article.setCategories(categories);
         article.setContent(articleInsertDTO.getContent());
         articleRepository.save(article);
 
@@ -152,9 +173,27 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     @Transactional
+    public void insertComment(UUID id, CommentInsertDTO commentInsertDTO, AppUser user) {
+        Article article = articleRepository.getOne(id);
+        if (article == null || user == null) {
+            throw new EntityNotFoundException();
+        }
+
+        Comment comment = new Comment();
+        comment.setArticle(article);
+        comment.setContent(commentInsertDTO.getContent());
+        comment.setAuthor(user);
+        
+        commentRepository.save(comment);
+    }
+
+    @Override
+    @Transactional
     public void likeArticle(UUID id, AppUser user) {
         var article = articleRepository.getOne(id);
-        if (article.getLikedUsers().contains(user)) {
+        if (user == null) {
+            throw new EntityNotFoundException();
+        } else if (article.getLikedUsers().contains(user)) {
             throw new ConflictException();
         }
 
@@ -166,7 +205,9 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public void unlikeArticle(UUID id, AppUser user) {
         var article = articleRepository.getOne(id);
-        if (!article.getLikedUsers().contains(user)) {
+        if (user == null) {
+            throw new EntityNotFoundException();
+        } else if (!article.getLikedUsers().contains(user)) {
             throw new ConflictException();
         }
 

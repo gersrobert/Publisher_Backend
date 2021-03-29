@@ -27,16 +27,15 @@ public class ArticleController extends AbstractController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ArticleDetailedDTO> getArticleById(
-            @PathVariable String id,
+    @GetMapping("/{articleId}")
+    public ResponseEntity<ArticleDetailedDTO> getArticleById(@PathVariable String articleId,
             @RequestHeader(value = "Authorization", required = false) String userId) {
 
         var user = userService.checkIfUserExists(userId);
 
         ArticleDetailedDTO article;
         try {
-            article = articleService.getById(UUID.fromString(id), user);
+            article = articleService.getById(UUID.fromString(articleId), user);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(404).build();
         } catch (Exception e) {
@@ -76,8 +75,8 @@ public class ArticleController extends AbstractController {
 
     @PostMapping(value = "", headers = "Accept=application/json", produces = "application/json")
     public ResponseEntity<IdDTO> insertArticle(
-        @RequestHeader(name = "Authorization", required = false) String accessToken,
-        @RequestBody ArticleInsertDTO article) {
+            @RequestHeader(name = "Authorization") String accessToken,
+            @RequestBody ArticleInsertDTO article) {
 
         var user = userService.checkIfUserExists(accessToken);
 
@@ -91,17 +90,16 @@ public class ArticleController extends AbstractController {
         }
     }
 
-    @PutMapping(value = "/{id}", headers = "Accept=application/json", produces = "application/json")
-    public ResponseEntity<IdDTO> updateArticle(
-        @PathVariable String id,
-        @RequestHeader(name = "Authorization", required = false) String accessToken,
-        @RequestBody ArticleInsertDTO article) {
+    @PutMapping(value = "/{articleId}", headers = "Accept=application/json", produces = "application/json")
+    public ResponseEntity<IdDTO> updateArticle(@PathVariable String articleId,
+            @RequestHeader(name = "Authorization") String accessToken,
+            @RequestBody ArticleInsertDTO article) {
 
         var user = userService.checkIfUserExists(accessToken);
 
         IdDTO idDTO = new IdDTO();
         try {
-            idDTO.setId(articleService.updateArticle(UUID.fromString(id), article, user).toString());
+            idDTO.setId(articleService.updateArticle(UUID.fromString(articleId), article, user).toString());
             return ResponseEntity.ok(idDTO);
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -110,10 +108,8 @@ public class ArticleController extends AbstractController {
     }
 
     @DeleteMapping("/{articleId}")
-    public ResponseEntity<?> deleteArticle(
-        @PathVariable String articleId,
-        @RequestHeader(name = "Authorization", required = false) String accessToken
-        ) {
+    public ResponseEntity<?> deleteArticle(@PathVariable String articleId,
+            @RequestHeader(name = "Authorization") String accessToken) {
         var user = userService.checkIfUserExists(accessToken);
 
         try {
@@ -127,17 +123,27 @@ public class ArticleController extends AbstractController {
         }
     }
 
-    @PostMapping(value = "/comment", headers = "Accept=application/json", produces = "application/json")
-    public ResponseEntity<?> insertComment(@RequestBody CommentInsertDTO comment) {
-        throw new RuntimeException("Not yet implemented");
+    @PostMapping(value = "/{articleId}/comment", headers = "Accept=application/json", produces = "application/json")
+    public ResponseEntity<?> insertComment(@PathVariable String articleId,
+            @RequestHeader("Authorization") String accessToken, @RequestBody CommentInsertDTO comment) {
+        var user = userService.checkIfUserExists(accessToken);
+
+        try {
+            articleService.insertComment(UUID.fromString(articleId), comment, user);
+            return ResponseEntity.ok().build();
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(404).build();
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            return ResponseEntity.status(500).build();
+        }
     }
 
     @PutMapping(value = "/{articleId}/like")
-    public ResponseEntity<Integer> likeArticle(
-            @RequestHeader("Authorization") String userId,
-            @PathVariable String articleId) {
+    public ResponseEntity<Integer> likeArticle(@PathVariable String articleId,
+            @RequestHeader("Authorization") String accessToken) {
 
-        var user = userService.checkIfUserExists(userId);
+        var user = userService.checkIfUserExists(accessToken);
 
         try {
             articleService.likeArticle(UUID.fromString(articleId), user);
@@ -153,10 +159,10 @@ public class ArticleController extends AbstractController {
     }
 
     @PutMapping(value = "/{articleId}/unlike")
-    public ResponseEntity<Integer> unlikeArticle(@RequestHeader("Authorization") String userId,
-                                                 @PathVariable String articleId) {
+    public ResponseEntity<Integer> unlikeArticle(@PathVariable String articleId,
+            @RequestHeader("Authorization") String accessToken) {
 
-        var user = userService.checkIfUserExists(userId);
+        var user = userService.checkIfUserExists(accessToken);
 
         try {
             articleService.unlikeArticle(UUID.fromString(articleId), user);
