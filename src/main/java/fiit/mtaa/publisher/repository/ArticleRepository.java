@@ -1,5 +1,6 @@
 package fiit.mtaa.publisher.repository;
 
+import fiit.mtaa.publisher.entity.AppUser;
 import fiit.mtaa.publisher.entity.Article;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,7 +9,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import java.util.UUID;
 
 public interface ArticleRepository extends JpaRepository<Article, UUID>, JpaSpecificationExecutor<Article> {
-
     static Specification<Article> hasAuthor(String name) {
         name = "%" + name + "%";
         return hasAuthorFirstName(name)

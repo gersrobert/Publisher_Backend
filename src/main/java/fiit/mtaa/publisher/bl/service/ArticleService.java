@@ -16,11 +16,11 @@ public interface ArticleService {
 
     Page<ArticleSimpleDTO> getFiltered(FilterCriteria filterCriteria, @Nullable AppUser currentUser);
 
-    UUID insertArticle(ArticleInsertDTO articleInsertDTO);
+    UUID insertArticle(ArticleInsertDTO articleInsertDTO, AppUser user);
 
-    void updateArticle(ArticleInsertDTO articleInsertDTO);
+    UUID updateArticle(UUID id, ArticleInsertDTO articleInsertDTO, AppUser user);
 
-    void deleteArticle(UUID id);
+    void deleteArticle(UUID id, AppUser user);
 
     void likeArticle(UUID id, AppUser user);
 

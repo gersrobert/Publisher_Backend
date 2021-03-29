@@ -1,8 +1,12 @@
 package fiit.mtaa.publisher.bl.impl;
 
 import fiit.mtaa.publisher.entity.AppUser;
+import fiit.mtaa.publisher.entity.Article;
+import fiit.mtaa.publisher.entity.Category;
 import fiit.mtaa.publisher.exception.ConflictException;
 import fiit.mtaa.publisher.repository.ArticleRepository;
+import fiit.mtaa.publisher.repository.CategoryRepository;
+import fiit.mtaa.publisher.repository.UserRepository;
 import fiit.mtaa.publisher.bl.service.ArticleService;
 import fiit.mtaa.publisher.dto.*;
 import org.modelmapper.ModelMapper;
@@ -12,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -26,6 +31,12 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Autowired
     private ArticleRepository articleRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Override
     public ArticleDetailedDTO getById(UUID id, AppUser currentUser) {
@@ -79,17 +90,63 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public UUID insertArticle(ArticleInsertDTO articleInsertDTO) {
-        return null;
+    @Transactional
+    public UUID insertArticle(ArticleInsertDTO articleInsertDTO, AppUser user) {
+        Article article = new Article();
+
+        article.setTitle(articleInsertDTO.getTitle());
+        article.setCategories(articleInsertDTO.getCategories().stream().map(categoryName -> {
+            Category category = categoryRepository.getFirstByName(categoryName);
+            
+            if (category == null) {
+                category = new Category();
+                category.setName(categoryName);
+                categoryRepository.save(category);
+            }
+            
+            return category;
+        }).collect(Collectors.toList()));
+        article.setContent(articleInsertDTO.getContent());
+        article.setAuthor(user);
+        articleRepository.save(article);
+        
+        return article.getId();
     }
 
     @Override
-    public void updateArticle(ArticleInsertDTO articleInsertDTO) {
+    @Transactional
+    public UUID updateArticle(UUID id, ArticleInsertDTO articleInsertDTO, AppUser user) {
+        Article article = articleRepository.getOne(id);
 
+        if (article == null || article.getAuthor() != user) {
+            return null;
+        }
+
+        article.setTitle(articleInsertDTO.getTitle());
+        article.setCategories(articleInsertDTO.getCategories().stream().map(categoryName -> {
+            Category category = categoryRepository.getFirstByName(categoryName);
+            
+            if (category == null) {
+                category = new Category();
+                category.setName(categoryName);
+                categoryRepository.save(category);
+            }
+            
+            return category;
+        }).collect(Collectors.toList()));
+        article.setContent(articleInsertDTO.getContent());
+        articleRepository.save(article);
+
+        return article.getId();
     }
 
     @Override
-    public void deleteArticle(UUID id) {
+    public void deleteArticle(UUID id, AppUser user) {
+        Article article = articleRepository.getOne(id);
+        if (article == null || article.getAuthor() != user) {
+            throw new EntityNotFoundException();
+        }
+
         articleRepository.deleteById(id);
     }
 

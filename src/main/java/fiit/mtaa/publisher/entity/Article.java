@@ -85,8 +85,8 @@ public class Article extends AbstractEntity {
         return author;
     }
 
-    public void setAuthor(AppUser authors) {
-        this.author = authors;
+    public void setAuthor(AppUser author) {
+        this.author = author;
     }
 
     public List<AppUser> getLikedUsers() {

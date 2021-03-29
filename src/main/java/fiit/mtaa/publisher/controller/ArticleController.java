@@ -3,6 +3,7 @@ package fiit.mtaa.publisher.controller;
 import fiit.mtaa.publisher.bl.service.ArticleService;
 import fiit.mtaa.publisher.bl.service.UserService;
 import fiit.mtaa.publisher.dto.*;
+import fiit.mtaa.publisher.entity.AppUser;
 import fiit.mtaa.publisher.exception.ConflictException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,19 +75,49 @@ public class ArticleController extends AbstractController {
     }
 
     @PostMapping(value = "", headers = "Accept=application/json", produces = "application/json")
-    public ResponseEntity<IdDTO> insertArticle(@RequestBody ArticleInsertDTO article) {
-        throw new RuntimeException("Not yet implemented");
+    public ResponseEntity<IdDTO> insertArticle(
+        @RequestHeader(name = "Authorization", required = false) String accessToken,
+        @RequestBody ArticleInsertDTO article) {
+
+        var user = userService.checkIfUserExists(accessToken);
+
+        IdDTO idDTO = new IdDTO();
+        try {
+            idDTO.setId(articleService.insertArticle(article, user).toString());
+            return ResponseEntity.ok(idDTO);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return ResponseEntity.status(500).build();
+        }
     }
 
-    @PutMapping(value = "", headers = "Accept=application/json", produces = "application/json")
-    public ResponseEntity<IdDTO> updateArticle(@RequestBody ArticleInsertDTO article) {
-        throw new RuntimeException("Not yet implemented");
+    @PutMapping(value = "/{id}", headers = "Accept=application/json", produces = "application/json")
+    public ResponseEntity<IdDTO> updateArticle(
+        @PathVariable String id,
+        @RequestHeader(name = "Authorization", required = false) String accessToken,
+        @RequestBody ArticleInsertDTO article) {
+
+        var user = userService.checkIfUserExists(accessToken);
+
+        IdDTO idDTO = new IdDTO();
+        try {
+            idDTO.setId(articleService.updateArticle(UUID.fromString(id), article, user).toString());
+            return ResponseEntity.ok(idDTO);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return ResponseEntity.status(500).build();
+        }
     }
 
     @DeleteMapping("/{articleId}")
-    public ResponseEntity<?> deleteArticle(@PathVariable String articleId) {
+    public ResponseEntity<?> deleteArticle(
+        @PathVariable String articleId,
+        @RequestHeader(name = "Authorization", required = false) String accessToken
+        ) {
+        var user = userService.checkIfUserExists(accessToken);
+
         try {
-            articleService.deleteArticle(UUID.fromString(articleId));
+            articleService.deleteArticle(UUID.fromString(articleId), user);
             return ResponseEntity.ok().build();
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(404).build();
