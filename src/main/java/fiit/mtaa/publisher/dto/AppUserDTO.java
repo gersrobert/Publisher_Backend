@@ -7,7 +7,7 @@ public class AppUserDTO extends AbstractDTO {
 	protected String firstName;
 	protected String lastName;
 	protected String userName;
-	protected Byte[] photo;
+	protected byte[] photo;
 
 	public String getFirstName() {
 		return firstName;
@@ -36,12 +36,12 @@ public class AppUserDTO extends AbstractDTO {
 		this.userName = userName;
 	}
 
-	public Byte[] getPhoto() {
+	public byte[] getPhoto() {
 		return photo;
 	}
 
 	@JsonSetter
-	public void setPhoto(Byte[] photo) {
+	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
 }

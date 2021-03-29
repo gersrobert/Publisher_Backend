@@ -1,6 +1,9 @@
 package fiit.mtaa.publisher.entity;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
+import java.sql.Blob;
 import java.util.List;
 
 @Entity
@@ -22,7 +25,6 @@ public class AppUser extends AbstractEntity {
     protected String firstName;
 
     protected String lastName;
-
 
     @ManyToMany
     @JoinTable(name = "app_user_liked_articles",
@@ -73,6 +75,14 @@ public class AppUser extends AbstractEntity {
 
     public void setLikedArticles(List<Article> likedArticles) {
         this.likedArticles = likedArticles;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     public byte[] getPhoto() {
