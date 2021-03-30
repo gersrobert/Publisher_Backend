@@ -39,9 +39,9 @@ public class UserController extends AbstractController {
 	}
 
 	@GetMapping(value = "")
-	public ResponseEntity<AppUser> getUser(@RequestHeader(name = "Authorization", required = true) String accessToken) {
+	public ResponseEntity<AppUserDTO> getUser(@RequestHeader(name = "Authorization", required = true) String accessToken) {
 		try {
-			var user = userService.checkIfUserExists(accessToken);
+			var user = userService.getUser(accessToken);
 			return ResponseEntity.ok(user);
 		} catch (EntityNotFoundException e) {
 			return ResponseEntity.status(404).build();
@@ -66,17 +66,5 @@ public class UserController extends AbstractController {
 			logger.error(e.getMessage(), e);
 			return ResponseEntity.status(500).build();
 		}
-	}
-
-	@GetMapping(value = "/test1")
-	public ResponseEntity getTest1() {
-		System.out.println("test1 successful");
-		return new ResponseEntity(HttpStatus.OK);
-	}
-
-	@GetMapping(value = "/test2")
-	public ResponseEntity getTest2() {
-		System.out.println("test2 successful");
-		return new ResponseEntity(HttpStatus.OK);
 	}
 }

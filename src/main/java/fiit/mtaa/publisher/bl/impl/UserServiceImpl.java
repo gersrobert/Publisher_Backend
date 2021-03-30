@@ -2,10 +2,14 @@ package fiit.mtaa.publisher.bl.impl;
 
 import fiit.mtaa.publisher.bl.service.UserService;
 import fiit.mtaa.publisher.dto.AppUserDTO;
+import fiit.mtaa.publisher.dto.ArticleSimpleDTO;
+import fiit.mtaa.publisher.dto.CategoryDTO;
 import fiit.mtaa.publisher.dto.UserinfoDTO;
 import fiit.mtaa.publisher.entity.AppUser;
+import fiit.mtaa.publisher.entity.Article;
+import fiit.mtaa.publisher.repository.ArticleRepository;
 import fiit.mtaa.publisher.repository.UserRepository;
-import org.hibernate.Session;
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +23,21 @@ import org.springframework.web.client.RestTemplate;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import java.util.Base64;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     @PersistenceContext
     EntityManager entityManager;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @Autowired
+    private ArticleRepository articleRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -109,14 +120,20 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public AppUserDTO getUser(UUID uuid) {
         var entity = userRepository.getOne(uuid);
-        return parseDto(entity);
+        
+        List<Article> articles = articleRepository.findByAuthor(entity);
+        
+        return parseDto(entity, articles);
     }
 
     @Override
     @Transactional
     public AppUserDTO getUser(String accessToken) {
         var entity = checkIfUserExists(accessToken);
-        return parseDto(entity);
+
+        List<Article> articles = articleRepository.findByAuthor(entity);
+
+        return parseDto(entity, articles);
     }
 
     @Override
@@ -125,13 +142,24 @@ public class UserServiceImpl implements UserService {
         user.setPhoto(photo);
     }
 
-    private AppUserDTO parseDto(AppUser entity) {
+    private AppUserDTO parseDto(AppUser userEntity, List<Article> articleEntity) {
         var dto = new AppUserDTO();
-        dto.setId(String.valueOf(entity.getId()));
-        dto.setFirstName(entity.getFirstName());
-        dto.setLastName(entity.getLastName());
-        dto.setUserName(entity.getUserName());
-        dto.setPhoto(Base64.getEncoder().encode(entity.getPhoto()));
+        dto.setId(String.valueOf(userEntity.getId()));
+        dto.setFirstName(userEntity.getFirstName());
+        dto.setLastName(userEntity.getLastName());
+        dto.setUserName(userEntity.getUserName());
+        // dto.setPhoto(Base64.getEncoder().encode(userEntity.getPhoto()));
+        
+        dto.setArticles(articleEntity.stream().map(article -> {
+            var articleSimpleDTO = new ArticleSimpleDTO();
+            articleSimpleDTO.setId(article.getId().toString());
+            articleSimpleDTO.setTitle(article.getTitle());
+            articleSimpleDTO.setCreatedAt(article.getCreatedAt());
+            articleSimpleDTO.setCategories(article.getCategories().stream().map(c -> modelMapper.map(c, CategoryDTO.class)).collect(Collectors.toList()));
+            articleSimpleDTO.setLikeCount(article.getLikeCount());
+
+            return articleSimpleDTO;
+        }).collect(Collectors.toList()));
 
         return dto;
     }

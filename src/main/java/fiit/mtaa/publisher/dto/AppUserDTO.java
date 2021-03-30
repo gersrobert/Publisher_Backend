@@ -1,5 +1,7 @@
 package fiit.mtaa.publisher.dto;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 public class AppUserDTO extends AbstractDTO {
@@ -8,6 +10,7 @@ public class AppUserDTO extends AbstractDTO {
 	protected String lastName;
 	protected String userName;
 	protected byte[] photo;
+	protected List<ArticleSimpleDTO> articles;
 
 	public String getFirstName() {
 		return firstName;
@@ -43,5 +46,14 @@ public class AppUserDTO extends AbstractDTO {
 	@JsonSetter
 	public void setPhoto(byte[] photo) {
 		this.photo = photo;
+	}
+
+	public List<ArticleSimpleDTO> getArticles() {
+		return articles;
+	}
+
+	@JsonSetter
+	public void setArticles(List<ArticleSimpleDTO> articles) {
+		this.articles = articles;
 	}
 }

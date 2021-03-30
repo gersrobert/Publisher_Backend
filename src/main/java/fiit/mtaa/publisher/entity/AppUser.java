@@ -8,15 +8,6 @@ import java.util.List;
 
 @Entity
 public class AppUser extends AbstractEntity {
-    // protected String sub;
-	// protected String givenName;
-	// protected String familyName;
-	// protected String nickname;
-	// protected String name;
-	// protected String picture;
-	// protected String locale;
-	// protected String updatedAt;
-
     @Column(unique = true)
     protected String subject;
 
