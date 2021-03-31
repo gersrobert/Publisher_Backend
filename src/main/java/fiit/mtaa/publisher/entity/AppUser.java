@@ -17,12 +17,6 @@ public class AppUser extends AbstractEntity {
 
     protected String lastName;
 
-    @ManyToMany
-    @JoinTable(name = "app_user_liked_articles",
-            joinColumns = { @JoinColumn(name = "user_id") },
-            inverseJoinColumns = { @JoinColumn(name = "article_id") })
-    protected List<Article> likedArticles;
-
     protected byte[] photo;
 
     @OneToMany(mappedBy = "article", cascade=CascadeType.PERSIST)
@@ -58,14 +52,6 @@ public class AppUser extends AbstractEntity {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public List<Article> getLikedArticles() {
-        return likedArticles;
-    }
-
-    public void setLikedArticles(List<Article> likedArticles) {
-        this.likedArticles = likedArticles;
     }
 
     public List<Comment> getComments() {

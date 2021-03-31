@@ -51,7 +51,7 @@ public class UserController extends AbstractController {
 		}
 	}
 
-	@PostMapping(value = "/set_photo")
+	@PutMapping(value = "/set_photo")
 	public ResponseEntity<?> setPhoto(@RequestHeader(name = "Authorization", required = false) String accessToken,
 								   @RequestBody String photo) {
 		var user = userService.checkIfUserExists(accessToken);

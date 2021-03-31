@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "OpenAPI definition",
-    "version": "v0"
+    "title": "Publisher API",
+    "version": "v1"
   },
   "servers": [
     {
@@ -189,54 +189,6 @@
           }
         }
       },
-      "put": {
-        "tags": [
-          "article-controller"
-        ],
-        "operationId": "updateArticle",
-        "parameters": [
-          {
-            "name": "Accept",
-            "in": "header",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "application/json"
-              ]
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ArticleInsertDTO"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "500": {
-            "description": "Internal error"
-          }
-        }
-      },
       "post": {
         "tags": [
           "article-controller"
@@ -291,20 +243,17 @@
       }
     },
     "/user/set_photo": {
-      "post": {
+      "put": {
         "tags": [
           "user-controller"
         ],
+        "summary": "Set user photo",
         "operationId": "setPhoto",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "format": "byte"
-                }
+                "type": "string"
               }
             }
           },
@@ -342,151 +291,21 @@
         }
       }
     },
-    "/user/register": {
-      "post": {
-        "tags": [
-          "user-controller"
-        ],
-        "operationId": "registerUser",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AppUserWithPasswordDTO"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "description": "Created",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/IdDTO"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "500": {
-            "description": "Internal error"
-          }
-        }
-      }
-    },
-    "/auth/validate": {
-      "post": {
-        "tags": [
-          "auth-controller"
-        ],
-        "operationId": "validate",
-        "parameters": [
-          {
-            "name": "Accept",
-            "in": "header",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "application/json"
-              ]
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginRequestDTO"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Jwt"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal error"
-          }
-        }
-      }
-    },
-    "/auth/renew": {
-      "post": {
-        "tags": [
-          "auth-controller"
-        ],
-        "operationId": "validate_1",
-        "parameters": [
-          {
-            "name": "Accept",
-            "in": "header",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "application/json"
-              ]
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Jwt"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Jwt"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal error"
-          }
-        }
-      }
-    },
-    "/article/comment": {
+    "/article/{articleId}/comment": {
       "post": {
         "tags": [
           "article-controller"
         ],
         "operationId": "insertComment",
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "Accept",
             "in": "header",
@@ -536,7 +355,8 @@
         "tags": [
           "user-controller"
         ],
-        "operationId": "getUser",
+        "summary": "Get user by id",
+        "operationId": "getUserById",
         "parameters": [
           {
             "name": "uuid",
@@ -575,6 +395,7 @@
         "tags": [
           "user-controller"
         ],
+        "summary": "Get current user",
         "operationId": "getUser",
         "responses": {
           "200": {
@@ -644,6 +465,62 @@
             "description": "Internal error"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "article-controller"
+        ],
+        "operationId": "updateArticle",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "application/json"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ArticleInsertDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal error"
+          }
+        }
       }
     },
     "/article/{articleId}": {
@@ -694,10 +571,6 @@
       "ArticleInsertDTO": {
         "type": "object",
         "properties": {
-          "author": {
-            "type": "string",
-            "format": "uuid"
-          },
           "title": {
             "type": "string"
           },
@@ -781,14 +654,6 @@
         "properties": {
           "content": {
             "type": "string"
-          },
-          "articleId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "appUserId": {
-            "type": "string",
-            "format": "uuid"
           }
         }
       },
