@@ -16,5 +16,5 @@ public interface UserService {
 
     AppUserDTO getUser(String accessToken);
 
-    void updatePhoto(AppUser user, byte[] photo);
+    void updatePhoto(AppUser user, String photo);
 }

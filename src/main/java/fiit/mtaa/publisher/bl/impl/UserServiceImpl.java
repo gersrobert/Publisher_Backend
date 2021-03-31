@@ -23,7 +23,7 @@ import org.springframework.web.client.RestTemplate;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import java.util.Base64;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -139,8 +139,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void updatePhoto(AppUser user, byte[] photo) {
-        user.setPhoto(photo);
+    public void updatePhoto(AppUser user, String photo) {
+        var content = photo.split(",")[1];
+        content = content.substring(0, content.length() - 2);
+
+        user.setPhoto(content.getBytes(StandardCharsets.UTF_8));
+        userRepository.save(user);
     }
 
     private AppUserDTO parseDto(AppUser userEntity, List<Article> articleEntity) {
@@ -151,7 +155,7 @@ public class UserServiceImpl implements UserService {
         dto.setUserName(userEntity.getUserName());
 
         if (userEntity.getPhoto() != null) {
-            dto.setPhoto(Base64.getEncoder().encode(userEntity.getPhoto()));
+            dto.setPhoto(new String(userEntity.getPhoto(), StandardCharsets.UTF_8));
         }
 
         dto.setArticles(articleEntity.stream().map(article -> {
