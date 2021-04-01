@@ -1,9 +1,6 @@
 package fiit.mtaa.publisher.bl.impl;
 
-import fiit.mtaa.publisher.entity.AppUser;
-import fiit.mtaa.publisher.entity.Article;
-import fiit.mtaa.publisher.entity.Category;
-import fiit.mtaa.publisher.entity.Comment;
+import fiit.mtaa.publisher.entity.*;
 import fiit.mtaa.publisher.exception.ConflictException;
 import fiit.mtaa.publisher.repository.ArticleRepository;
 import fiit.mtaa.publisher.repository.CategoryRepository;
@@ -168,7 +165,8 @@ public class ArticleServiceImpl implements ArticleService {
             throw new EntityNotFoundException();
         }
 
-        articleRepository.deleteById(id);
+        article.setState(AbstractEntity.STATE_DELETED);
+        articleRepository.save(article);
     }
 
     @Override
