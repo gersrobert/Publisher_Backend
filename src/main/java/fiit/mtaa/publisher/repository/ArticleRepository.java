@@ -25,8 +25,11 @@ public interface ArticleRepository extends JpaRepository<Article, UUID>, JpaSpec
     }
 
     static Specification<Article> hasCategory(String name) {
-        return (article, query, builder) -> builder
-                .like(builder.lower(article.join("categories").get("name")), "%" + name.toLowerCase() + "%");
+        return (article, query, builder) -> {
+            query.distinct(true);
+            return builder
+                    .like(builder.lower(article.join("categories").get("name")), "%" + name.toLowerCase() + "%");
+        };
     }
 
     private static Specification<Article> hasAuthorFirstName(String name) {
