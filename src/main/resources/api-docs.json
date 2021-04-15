@@ -299,7 +299,7 @@
         "operationId": "insertComment",
         "parameters": [
           {
-            "name": "id",
+            "name": "articleId",
             "in": "path",
             "required": true,
             "schema": {

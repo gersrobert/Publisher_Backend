@@ -101,17 +101,19 @@ public class ArticleServiceImpl implements ArticleService {
 
         List<Category> categories = new ArrayList<Category>();
 
-        for (String categoryName : articleInsertDTO.getCategories()) {
-            Category category = categoryRepository.getFirstByName(categoryName);
-            
-            if (category == null) {
-                category = new Category();
-                category.setName(categoryName);
-                categoryRepository.save(category);
-            }
-            
-            if (!categories.contains(category)) {
-                categories.add(category);
+        if (articleInsertDTO.getCategories() != null) {
+            for (String categoryName : articleInsertDTO.getCategories()) {
+                Category category = categoryRepository.getFirstByName(categoryName);
+
+                if (category == null) {
+                    category = new Category();
+                    category.setName(categoryName);
+                    categoryRepository.save(category);
+                }
+
+                if (!categories.contains(category)) {
+                    categories.add(category);
+                }
             }
         }
 
@@ -136,17 +138,19 @@ public class ArticleServiceImpl implements ArticleService {
 
         List<Category> categories = new ArrayList<Category>();
 
-        for (String categoryName : articleInsertDTO.getCategories()) {
-            Category category = categoryRepository.getFirstByName(categoryName);
-            
-            if (category == null) {
-                category = new Category();
-                category.setName(categoryName);
-                categoryRepository.save(category);
-            }
-            
-            if (!categories.contains(category)) {
-                categories.add(category);
+        if (articleInsertDTO.getCategories() != null) {
+            for (String categoryName : articleInsertDTO.getCategories()) {
+                Category category = categoryRepository.getFirstByName(categoryName);
+
+                if (category == null) {
+                    category = new Category();
+                    category.setName(categoryName);
+                    categoryRepository.save(category);
+                }
+
+                if (!categories.contains(category)) {
+                    categories.add(category);
+                }
             }
         }
 
