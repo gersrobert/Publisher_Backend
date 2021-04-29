@@ -140,7 +140,8 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void updatePhoto(AppUser user, String photo) {
-        user.setPhoto(photo.getBytes(StandardCharsets.UTF_8));
+        var content = photo.substring(1, photo.length() - 1);
+        user.setPhoto(content.getBytes(StandardCharsets.UTF_8));
         userRepository.save(user);
     }
 
